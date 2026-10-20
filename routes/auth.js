@@ -103,7 +103,7 @@ router.post("/register", async (req, res) => {
 
                 res.status(201).json({
                     success: true,
-                    message: "Registration successful! Welcome to CakeHub.",
+                    message: "Registration successful! Welcome to BakeHub.",
                     token,
                     user: {
                         id: result.insertId,

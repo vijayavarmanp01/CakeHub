@@ -1,32 +1,37 @@
-# CakeHub 🍰 — Artisanal Patisserie & Online Bakery
+# BakeHub 🥐 — Connecting People with Bakeries Online
 
-CakeHub is a full-stack e-commerce web application for an artisanal bakery. It features user authentication with JWT, a rich product catalogue with category filters and search, product detail modal previews, an interactive shopping cart, order placement, order tracking/receipt history, profile management, and an administration portal.
+**BakeHub** is a full-stack web application designed with the mission to connect people with local artisanal bakeries through seamless online ordering. Customers can discover freshly baked artisan cakes, warm cookies, delicate pastries, and flaky viennoiseries baked daily with premium ingredients, customized, and delivered directly to their doorstep.
 
 ---
 
 ## 🚀 Features
 
-- **Storefront & Catalogue**:
-  - Live catalogue with category filters (`Cakes`, `Cookies`, `Pastries`, `Viennoiseries`, `All Treats`).
-  - Instant search and sorting (by newest, price low-to-high, price high-to-low, name A-Z).
-  - Detailed product preview modal with quantity adjustments.
+- **Connecting People & Local Bakeries**:
+  - Live patisserie & bakery menu catalogue categorized by `Cakes`, `Cookies`, `Pastries`, `Viennoiseries`, and `All Treats`.
+  - Instant live search and multiple sorting options (Featured/Newest, Price: Low to High, Price: High to Low, Alphabetical A-Z).
+  - Product detail modal with real-time portion/quantity selection and descriptions.
 
 - **User Authentication**:
-  - Secure registration and login using `bcrypt` password hashing and `JSON Web Tokens (JWT)`.
-  - Session persistence with automatic header updates and avatar display.
+  - Secure customer and admin registration & login using `bcrypt` salted password hashing and `JSON Web Tokens (JWT)`.
+  - Session persistence with automated UI state synchronization and profile dropdowns.
 
-- **Shopping Cart**:
-  - Real-time cart drawer with quantity increment/decrement and individual item removal.
-  - Subtotal computation and dynamic badge count.
+- **Interactive Shopping Cart**:
+  - Fly-out cart drawer with live quantity adjustments, subtotal calculations, and item removals.
+  - Dynamic navbar cart notification badge.
 
-- **Orders & Checkout**:
-  - Transactional order creation with delivery address, phone, and delivery notes.
-  - Interactive order confirmation modal with unique order reference.
-  - Comprehensive order history with itemized receipts and order status tracking.
+- **Seamless Checkout & Delivery**:
+  - Transactional order creation capturing customer delivery addresses, phone numbers, and special delivery notes.
+  - Instant Order Confirmation modal featuring generated unique Order Reference IDs.
+  - Order History modal with real-time status tracking (`Pending`, `Confirmed`, `Preparing`, `Out for Delivery`, `Delivered`, `Cancelled`).
 
-- **User Profile & Admin**:
-  - Edit personal information, contact number, and update account password.
-  - Admin portal for viewing customer orders, managing status, and adding new catalogue products.
+- **Customer Profile & Management**:
+  - Update personal details, contact number, and email.
+  - Password management and self-service account deletion.
+
+- **Bakery Administration Portal**:
+  - View all customer orders across the platform.
+  - Update live order fulfillment status.
+  - Add new freshly baked items to the storefront catalogue.
 
 ---
 
@@ -34,8 +39,8 @@ CakeHub is a full-stack e-commerce web application for an artisanal bakery. It f
 
 - **Backend**: Node.js, Express.js 5
 - **Database**: MySQL (via `mysql2`)
-- **Authentication**: JSON Web Token (`jsonwebtoken`), `bcrypt`
-- **Frontend**: Vanilla HTML5, CSS3 (Modern Glassmorphism & Micro-animations), Vanilla JavaScript
+- **Security & Auth**: `bcrypt` (10 salt rounds), `jsonwebtoken` (JWT)
+- **Frontend**: Vanilla HTML5, Modern CSS3 (Glassmorphism, CSS Custom Properties, Responsive Layout), Vanilla JavaScript (Modular ES6+)
 
 ---
 
@@ -53,17 +58,17 @@ DB_HOST=localhost
 DB_USER=root
 DB_PASSWORD=your_mysql_password
 DB_NAME=cakehub
-JWT_SECRET=your_jwt_secret_key
+JWT_SECRET=bakehub_jwt_super_secret_2026_key
 JWT_EXPIRES_IN=24h
 ```
 
 ### 3. Database Setup & Migration
-Run the database migration script to ensure the required tables and initial sample bakery treats exist:
+Run the database migration script to verify tables, columns, and seed sample bakery items:
 ```bash
 node database/migrate.js
 ```
 
-### 4. Running the Server
+### 4. Running the Application
 ```bash
 # Start server
 npm start

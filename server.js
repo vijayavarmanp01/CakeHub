@@ -30,7 +30,7 @@ app.use("/api/orders", ordersRoutes);
 app.get("/api/health", (req, res) => {
     res.json({
         status: "OK",
-        appName: "CakeHub Bakery API",
+        appName: "BakeHub Bakery API",
         time: new Date().toISOString()
     });
 });
@@ -68,7 +68,7 @@ const PORT = process.env.PORT || 5000;
 // Only start the server when run directly (allows test runner to import app)
 if (require.main === module) {
     app.listen(PORT, () => {
-        console.log(`🎂 CakeHub server is running smoothly on http://localhost:${PORT}`);
+        console.log(`🥖 BakeHub server is running smoothly on http://localhost:${PORT}`);
         console.log(`🌐 Open http://localhost:${PORT} in your browser to view the storefront.`);
     });
 }

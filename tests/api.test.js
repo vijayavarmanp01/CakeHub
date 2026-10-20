@@ -1,5 +1,5 @@
 /**
- * CakeHub Automated Test Suite
+ * BakeHub Automated Test Suite
  * Tests all backend REST APIs, authentication, transactions, and edge cases
  */
 require("dotenv").config();
@@ -51,7 +51,7 @@ function request(method, path, body = null, token = null) {
 
 async function runTests() {
     console.log("==================================================");
-    console.log("🧪 STARTING CAKEHUB AUTOMATED TEST SUITE");
+    console.log("🧪 STARTING BAKEHUB AUTOMATED TEST SUITE");
     console.log("==================================================\n");
 
     let passed = 0;

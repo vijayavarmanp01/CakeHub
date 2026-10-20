@@ -1,8 +1,8 @@
 {
-  "name": "cakehub",
+  "name": "bakehub",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Connecting people with artisanal bakeries through online bakery ordering",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",

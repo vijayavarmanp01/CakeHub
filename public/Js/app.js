@@ -1,5 +1,5 @@
 /**
- * CakeHub — Patisserie & Bakery Frontend Application
+ * BakeHub — Artisanal Bakery & Online Ordering Frontend Application
  * Pure Vanilla JavaScript Client
  */
 
@@ -7,8 +7,8 @@
 // STATE MANAGEMENT
 // ==========================================
 const AppState = {
-    token: localStorage.getItem("cakehub_token") || null,
-    user: JSON.parse(localStorage.getItem("cakehub_user") || "null"),
+    token: localStorage.getItem("bakehub_token") || localStorage.getItem("cakehub_token") || null,
+    user: JSON.parse(localStorage.getItem("bakehub_user") || localStorage.getItem("cakehub_user") || "null"),
     products: [],
     cart: { items: [], totalItems: 0, totalAmount: 0 },
     activeCategory: "All",
@@ -199,13 +199,13 @@ function switchAuthTab(tab) {
         registerTab.classList.remove("active");
         loginForm.style.display = "block";
         registerForm.style.display = "none";
-        authTitle.textContent = "Welcome Back to CakeHub";
+        authTitle.textContent = "Welcome Back to BakeHub";
     } else {
         registerTab.classList.add("active");
         loginTab.classList.remove("active");
         registerForm.style.display = "block";
         loginForm.style.display = "none";
-        authTitle.textContent = "Create Your CakeHub Account";
+        authTitle.textContent = "Create Your BakeHub Account";
     }
 }
 
@@ -234,8 +234,8 @@ async function handleLogin(e) {
     if (res.ok && res.token) {
         AppState.token = res.token;
         AppState.user = res.user;
-        localStorage.setItem("cakehub_token", res.token);
-        localStorage.setItem("cakehub_user", JSON.stringify(res.user));
+        localStorage.setItem("bakehub_token", res.token);
+        localStorage.setItem("bakehub_user", JSON.stringify(res.user));
 
         showToast(res.message || "Welcome back!", "success");
         closeModal("auth-modal");
@@ -284,8 +284,8 @@ async function handleRegister(e) {
     if (res.ok && res.token) {
         AppState.token = res.token;
         AppState.user = res.user;
-        localStorage.setItem("cakehub_token", res.token);
-        localStorage.setItem("cakehub_user", JSON.stringify(res.user));
+        localStorage.setItem("bakehub_token", res.token);
+        localStorage.setItem("bakehub_user", JSON.stringify(res.user));
 
         showToast(res.message || "Registration successful!", "success");
         closeModal("auth-modal");
@@ -300,6 +300,8 @@ function handleLogout(showNotification = true) {
     AppState.token = null;
     AppState.user = null;
     AppState.cart = { items: [], totalItems: 0, totalAmount: 0 };
+    localStorage.removeItem("bakehub_token");
+    localStorage.removeItem("bakehub_user");
     localStorage.removeItem("cakehub_token");
     localStorage.removeItem("cakehub_user");
 
@@ -840,7 +842,7 @@ async function openProfileModal() {
     const res = await apiCall("/api/profile");
     if (res.ok && res.user) {
         AppState.user = { ...AppState.user, ...res.user };
-        localStorage.setItem("cakehub_user", JSON.stringify(AppState.user));
+        localStorage.setItem("bakehub_user", JSON.stringify(AppState.user));
 
         document.getElementById("profile-name").value = res.user.name || "";
         document.getElementById("profile-email").value = res.user.email || "";
@@ -871,7 +873,7 @@ async function handleUpdateProfile(e) {
 
     if (res.ok && res.success) {
         AppState.user = { ...AppState.user, ...res.user };
-        localStorage.setItem("cakehub_user", JSON.stringify(AppState.user));
+        localStorage.setItem("bakehub_user", JSON.stringify(AppState.user));
         updateAuthUI();
         showToast("Profile updated successfully!", "success");
     } else {
@@ -916,7 +918,7 @@ async function handleUpdatePassword(e) {
 }
 
 async function handleDeleteAccount() {
-    const confirmation = prompt("To permanently delete your CakeHub account, type 'DELETE':");
+    const confirmation = prompt("To permanently delete your BakeHub account, type 'DELETE':");
     if (confirmation !== "DELETE") {
         if (confirmation !== null) showToast("Account deletion cancelled.", "info");
         return;
