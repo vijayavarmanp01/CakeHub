@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CakeHub 🍰 — Artisanal Patisserie & Online Bakery</title>
+    <meta name="description" content="Experience handcrafted artisanal cakes, delicate pastries, gourmet cookies, and flaky viennoiseries baked fresh daily at CakeHub. Fast and delightful ordering.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ==========================================
+         SITE HEADER / NAVIGATION
+         ========================================== -->
+    <header class="site-header">
+        <div class="container nav-container">
+            <div class="brand-logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                <div class="brand-icon">
+                    <i class="fas fa-birthday-cake"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">Cake<span>Hub</span></span>
+                    <span class="brand-tagline">Artisanal Patisserie</span>
+                </div>
+            </div>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#hero" class="nav-link active">Home</a></li>
+                    <li><a href="#shop" class="nav-link">Shop</a></li>
+                    <li><a href="#categories" class="nav-link">Categories</a></li>
+                    <li><a href="javascript:void(0)" class="nav-link" onclick="openOrdersModal()">My Orders</a></li>
+                    <li><a href="#story" class="nav-link">Our Story</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-actions">
+                <!-- Shopping Cart Icon -->
+                <button class="btn-cart-nav" id="cart-nav-btn" onclick="toggleCartDrawer(true)" title="View Cart" aria-label="Shopping Cart">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-badge" id="cart-badge-count" style="display: none;">0</span>
+                </button>
+
+                <!-- Guest Actions -->
+                <div id="nav-auth-actions" style="display: flex; gap: 0.5rem;">
+                    <button class="btn btn-outline btn-sm" onclick="openAuthModal('login')">Sign In</button>
+                    <button class="btn btn-accent btn-sm" onclick="openAuthModal('register')">Register</button>
+                </div>
+
+                <!-- Logged In User Avatar Dropdown -->
+                <div class="user-menu-wrapper" id="nav-user-wrapper" style="display: none;">
+                    <button class="btn-user-avatar" id="user-avatar-btn">
+                        <div class="avatar-circle" id="user-avatar-initial">U</div>
+                        <span id="user-display-name">Account</span>
+                        <i class="fas fa-chevron-down" style="font-size: 0.75rem;"></i>
+                    </button>
+                    
+                    <div class="user-dropdown" id="user-dropdown-menu">
+                        <div class="dropdown-header">
+                            <div class="dropdown-user-name" id="dropdown-name">User Name</div>
+                            <div class="dropdown-user-email" id="dropdown-email">user@example.com</div>
+                        </div>
+                        <a href="javascript:void(0)" class="dropdown-item" onclick="openProfileModal()">
+                            <i class="fas fa-user-circle"></i> My Profile
+                        </a>
+                        <a href="javascript:void(0)" class="dropdown-item" onclick="openOrdersModal()">
+                            <i class="fas fa-receipt"></i> Order History
+                        </a>
+                        <a href="javascript:void(0)" class="dropdown-item" id="admin-nav-item" onclick="openAdminModal()" style="display:none; color:var(--color-gold);">
+                            <i class="fas fa-shield-alt"></i> Admin Portal
+                        </a>
+                        <div style="border-top: 1px solid var(--color-border); margin: 0.35rem 0;"></div>
+                        <a href="javascript:void(0)" class="dropdown-item danger" onclick="handleLogout()">
+                            <i class="fas fa-sign-out-alt"></i> Sign Out
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Hamburger -->
+                <button class="mobile-menu-btn" onclick="toggleCartDrawer(true)" aria-label="Open Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==========================================
+         HERO SECTION
+         ========================================== -->
+    <section class="hero-section" id="hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <span class="hero-badge">
+                    <i class="fas fa-award"></i> Handcrafted Daily with Pure Butter & Cocoa
+                </span>
+                <h1 class="hero-title">
+                    Sweet moments, <em>baked to perfection</em>.
+                </h1>
+                <p class="hero-description">
+                    Welcome to CakeHub, where traditional European patisserie artistry meets the freshest organic ingredients. From decadent chocolate truffles to flaky butter viennoiseries, indulge your senses.
+                </p>
+                <div class="hero-actions">
+                    <a href="#shop" class="btn btn-accent">
+                        <span>Explore Creations</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#categories" class="btn btn-outline">
+                        <span>View Categories</span>
+                    </a>
+                </div>
+                <div class="hero-perks">
+                    <div class="perk-item">
+                        <i class="fas fa-fire perk-icon"></i>
+                        <span>Freshly Baked Every Dawn</span>
+                    </div>
+                    <div class="perk-item">
+                        <i class="fas fa-truck-fast perk-icon"></i>
+                        <span>Prompt Same-Day Delivery</span>
+                    </div>
+                    <div class="perk-item">
+                        <i class="fas fa-heart perk-icon"></i>
+                        <span>100% Artisanal Quality</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="hero-image-card">
+                    <img src="images/bakery-hero.jpg" alt="Artisanal Patisserie Storefront and Cakes" onerror="this.src='images/chocolate-cake.jpg';">
+                </div>
+
+                <div class="floating-pill top-right">
+                    <div class="pill-icon star">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="pill-text">
+                        <strong>Fresh from Oven</strong>
+                        <span>Baked hourly</span>
+                    </div>
+                </div>
+
+                <div class="floating-pill bottom-left">
+                    <div class="pill-icon heart">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="pill-text">
+                        <strong>Pure Ingredients</strong>
+                        <span>No artificial flavor</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         CATEGORIES & PRODUCT CATALOGUE
+         ========================================== -->
+    <section class="categories-section" id="categories">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Gourmet Selection</span>
+                <h2 class="section-title">Explore Our Patisserie Menu</h2>
+                <p>Choose from our four signature categories or discover all handcrafted recipes.</p>
+            </div>
+
+            <!-- Category Pills -->
+            <div class="category-pills">
+                <button class="cat-pill active" data-category="All">
+                    <i class="fas fa-border-all"></i> All Treats
+                </button>
+                <button class="cat-pill" data-category="Cakes">
+                    <i class="fas fa-birthday-cake"></i> Cakes
+                </button>
+                <button class="cat-pill" data-category="Cookies">
+                    <i class="fas fa-cookie"></i> Cookies
+                </button>
+                <button class="cat-pill" data-category="Pastries">
+                    <i class="fas fa-cheese"></i> Pastries
+                </button>
+                <button class="cat-pill" data-category="Viennoiseries">
+                    <i class="fas fa-bread-slice"></i> Viennoiseries
+                </button>
+            </div>
+
+            <!-- Toolbar: Search & Sort -->
+            <div class="catalogue-toolbar" id="shop">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="catalogue-search" placeholder="Search by cake name or flavor..." aria-label="Search cakes">
+                </div>
+
+                <div class="sort-wrapper">
+                    <label for="catalogue-sort"><i class="fas fa-arrow-down-wide-short"></i> Sort By:</label>
+                    <select id="catalogue-sort" class="sort-select">
+                        <option value="newest">Featured & Newest</option>
+                        <option value="price_asc">Price: Low to High</option>
+                        <option value="price_desc">Price: High to Low</option>
+                        <option value="name_asc">Name: A to Z</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Products Catalogue Grid -->
+            <div class="products-grid" id="products-grid">
+                <!-- Dynamically populated by app.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         PROMOTIONAL STORY SECTION
+         ========================================== -->
+    <section class="container" id="story">
+        <div class="promo-banner">
+            <div class="promo-content">
+                <span class="promo-tag">Pure Passion</span>
+                <h3>The CakeHub Patisserie Promise</h3>
+                <p>
+                    Every cake in our kitchen starts with churned cream butter, unbleached flour, single-origin cacao, and hand-selected vanilla beans. Whether it's an intimate celebration or a family gathering, we bake each confection to bring pure delight.
+                </p>
+                <button class="btn btn-accent" onclick="window.scrollTo({top: document.getElementById('shop').offsetTop - 100, behavior: 'smooth'})">
+                    <span>Order Your Treat Today</span>
+                    <i class="fas fa-shopping-bag"></i>
+                </button>
+            </div>
+            <div class="promo-visual">
+                <img src="images/chocolate-cake.jpg" alt="Rich chocolate cake" style="max-height: 260px; border-radius: var(--radius-lg); margin: 0 auto; box-shadow: var(--shadow-lg);">
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         FOOTER
+         ========================================== -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h4>Cake<span>Hub</span> 🍰</h4>
+                    <p>
+                        Artisanal online bakery providing handcrafted gourmet cakes, pastries, cookies, and viennoiseries. Made fresh daily with genuine passion.
+                    </p>
+                    <div style="display: flex; gap: 0.75rem; font-size: 1.2rem;">
+                        <a href="javascript:void(0)" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="javascript:void(0)" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="javascript:void(0)" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h5 class="footer-title">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="#hero">Home</a></li>
+                        <li><a href="#shop">Bakery Catalogue</a></li>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="javascript:void(0)" onclick="openOrdersModal()">My Orders</a></li>
+                        <li><a href="javascript:void(0)" onclick="openProfileModal()">Account Settings</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="footer-title">Categories</h5>
+                    <ul class="footer-links">
+                        <li><a href="javascript:void(0)" onclick="selectCategory('Cakes')">Celebration Cakes</a></li>
+                        <li><a href="javascript:void(0)" onclick="selectCategory('Cookies')">Fresh Baked Cookies</a></li>
+                        <li><a href="javascript:void(0)" onclick="selectCategory('Pastries')">French Cream Pastries</a></li>
+                        <li><a href="javascript:void(0)" onclick="selectCategory('Viennoiseries')">Butter Viennoiseries</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="footer-title">Patisserie Kitchen</h5>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-location-dot" style="margin-top: 4px; color: var(--color-accent);"></i> <span>14 Gourmet Patisserie Lane, Bakery District</span></li>
+                        <li><i class="fas fa-phone" style="margin-top: 4px; color: var(--color-accent);"></i> <span>+91 98765 43210</span></li>
+                        <li><i class="fas fa-envelope" style="margin-top: 4px; color: var(--color-accent);"></i> <span>orders@cakehub.local</span></li>
+                        <li><i class="fas fa-clock" style="margin-top: 4px; color: var(--color-accent);"></i> <span>Mon - Sun: 7:00 AM - 10:00 PM</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 CakeHub Patisserie. Built with Node.js, Express, MySQL & Vanilla JS.</p>
+                <p>Freshly Handcrafted for You.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==========================================
+         CART DRAWER
+         ========================================== -->
+    <div class="cart-drawer-overlay" id="cart-drawer-overlay">
+        <div class="cart-drawer" id="cart-drawer">
+            <div class="cart-drawer-header">
+                <h3><i class="fas fa-shopping-bag" style="color: var(--color-accent);"></i> Your Bakery Cart</h3>
+                <button class="modal-close-btn" onclick="toggleCartDrawer(false)" aria-label="Close cart">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="cart-drawer-body" id="cart-drawer-items">
+                <!-- Dynamically rendered -->
+            </div>
+
+            <div class="cart-drawer-footer" id="cart-drawer-footer" style="display: none;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                    <span style="font-size: 0.95rem; color: var(--color-text-muted);">Estimated Subtotal</span>
+                    <strong style="font-size: 1.4rem; color: var(--color-primary); font-family: var(--font-heading);" id="cart-drawer-subtotal">₹0.00</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 1.25rem; font-size: 0.85rem; color: var(--color-success);">
+                    <span><i class="fas fa-check-circle"></i> Local Delivery</span>
+                    <span>Free</span>
+                </div>
+                <button class="btn btn-accent btn-block" onclick="openCheckoutModal()">
+                    <span>Proceed to Checkout</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+                <button class="btn btn-outline btn-block btn-sm" onclick="clearCart()" style="margin-top: 0.6rem; border-color: transparent;">
+                    Clear Cart
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         PRODUCT DETAIL MODAL
+         ========================================== -->
+    <div class="modal-overlay" id="product-detail-modal">
+        <div class="modal-card modal-lg">
+            <button class="modal-close-btn" onclick="closeModal('product-detail-modal')" aria-label="Close modal">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center;" class="form-row">
+                <div style="border-radius: var(--radius-md); overflow: hidden; height: 320px; background: var(--color-surface-soft);">
+                    <img id="detail-image" src="" alt="Product" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div>
+                    <span id="detail-category" class="product-category-tag" style="position: static; display: inline-block; margin-bottom: 0.75rem;">Category</span>
+                    <h2 id="detail-title" style="font-size: 1.8rem; margin-bottom: 0.5rem;">Product Name</h2>
+                    <div id="detail-price" style="font-size: 1.6rem; font-family: var(--font-heading); color: var(--color-accent); font-weight: 700; margin-bottom: 1rem;">₹0.00</div>
+                    <p id="detail-description" style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">Description</p>
+                    
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                        <span style="font-weight: 600; font-size: 0.9rem;">Quantity:</span>
+                        <div class="qty-control">
+                            <button class="qty-btn" type="button" onclick="adjustDetailQty(-1)"><i class="fas fa-minus"></i></button>
+                            <input type="text" id="detail-qty" value="1" readonly style="width: 32px; border: none; text-align: center; font-weight: 700;">
+                            <button class="qty-btn" type="button" onclick="adjustDetailQty(1)"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-accent btn-block" onclick="addDetailToCart()">
+                        <i class="fas fa-shopping-bag"></i> Add to My Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         AUTH MODAL (LOGIN & REGISTER)
+         ========================================== -->
+    <div class="modal-overlay" id="auth-modal">
+        <div class="modal-card">
+            <button class="modal-close-btn" onclick="closeModal('auth-modal')" aria-label="Close modal">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <!-- Switcher Tabs -->
+            <div style="display: flex; border-bottom: 1px solid var(--color-border); margin-bottom: 1.5rem;">
+                <button class="cat-pill active" id="tab-login-btn" onclick="switchAuthTab('login')" style="flex: 1; justify-content: center; border-radius: 0; box-shadow: none; border: none; background: transparent;">
+                    Sign In
+                </button>
+                <button class="cat-pill" id="tab-register-btn" onclick="switchAuthTab('register')" style="flex: 1; justify-content: center; border-radius: 0; box-shadow: none; border: none; background: transparent;">
+                    Create Account
+                </button>
+            </div>
+
+            <div class="modal-header">
+                <h3 id="auth-modal-title">Welcome Back to CakeHub</h3>
+                <p>Sign in to view your orders, manage cart, and save favorites.</p>
+            </div>
+
+            <!-- Login Form -->
+            <form id="form-login">
+                <div class="form-group">
+                    <label class="form-label" for="login-email">Email Address</label>
+                    <input type="email" id="login-email" class="form-input" placeholder="e.g. vijay@gmail.com" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="login-password">Password</label>
+                    <input type="password" id="login-password" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn btn-accent btn-block" id="login-submit-btn">
+                    <span>Sign In</span> <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+
+            <!-- Register Form -->
+            <form id="form-register" style="display: none;">
+                <div class="form-group">
+                    <label class="form-label" for="reg-name">Full Name *</label>
+                    <input type="text" id="reg-name" class="form-input" placeholder="e.g. Vijay Varman" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="reg-email">Email Address *</label>
+                    <input type="email" id="reg-email" class="form-input" placeholder="e.g. vijay@gmail.com" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="reg-phone">Phone Number (Optional)</label>
+                    <input type="tel" id="reg-phone" class="form-input" placeholder="e.g. 9876543210" autocomplete="tel">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="reg-password">Password *</label>
+                        <input type="password" id="reg-password" class="form-input" placeholder="Min. 6 chars" minlength="6" required autocomplete="new-password">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="reg-confirm-password">Confirm Password *</label>
+                        <input type="password" id="reg-confirm-password" class="form-input" placeholder="Repeat password" minlength="6" required autocomplete="new-password">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-accent btn-block" id="register-submit-btn">
+                    <span>Create Account</span> <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         CHECKOUT MODAL
+         ========================================== -->
+    <div class="modal-overlay" id="checkout-modal">
+        <div class="modal-card modal-lg">
+            <button class="modal-close-btn" onclick="closeModal('checkout-modal')" aria-label="Close modal">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="modal-header">
+                <h3>Bakery Checkout</h3>
+                <p>Review your order and provide delivery instructions.</p>
+            </div>
+
+            <form id="form-checkout">
+                <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2rem;" class="form-row">
+                    <!-- Delivery Information -->
+                    <div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="checkout-name">Recipient Name *</label>
+                                <input type="text" id="checkout-name" class="form-input" required placeholder="e.g. Vijay Varman">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="checkout-phone">Contact Phone *</label>
+                                <input type="tel" id="checkout-phone" class="form-input" required placeholder="e.g. 9876543210">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="checkout-address">Delivery Address *</label>
+                            <textarea id="checkout-address" class="form-textarea" rows="3" required placeholder="Flat/House no., Building, Street name, Area, City, Pincode"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="checkout-notes">Baker Instructions / Cake Message (Optional)</label>
+                            <input type="text" id="checkout-notes" class="form-input" placeholder="e.g. 'Happy Birthday Vijay!' on cake">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="checkout-payment">Payment Method</label>
+                            <select id="checkout-payment" class="form-select">
+                                <option value="Cash on Delivery">Cash on Delivery (Simulated Demo)</option>
+                                <option value="UPI / Online">Simulated Instant UPI / Card</option>
+                            </select>
+                            <div class="form-hint"><i class="fas fa-shield-alt"></i> Safe demo order — no real credit card required.</div>
+                        </div>
+                    </div>
+
+                    <!-- Order Summary Box -->
+                    <div style="background: var(--color-surface-soft); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--color-border); display: flex; flex-direction: column;">
+                        <h4 style="font-size: 1.1rem; margin-bottom: 1rem; color: var(--color-primary);">Order Summary</h4>
+                        <div id="checkout-summary-items" style="flex: 1; max-height: 200px; overflow-y: auto; margin-bottom: 1rem;">
+                            <!-- Populated dynamically -->
+                        </div>
+                        <div style="border-top: 1px solid var(--color-border); padding-top: 0.75rem; margin-bottom: 1.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-weight: 700;">Total Payable</span>
+                                <strong style="font-size: 1.4rem; color: var(--color-primary); font-family: var(--font-heading);" id="checkout-total-amount">₹0.00</strong>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-accent btn-block" id="btn-submit-order">
+                            <span>Confirm & Place Order</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         ORDER CONFIRMATION MODAL
+         ========================================== -->
+    <div class="modal-overlay" id="confirmation-modal">
+        <div class="modal-card" style="text-align: center; max-width: 480px;">
+            <div style="width: 70px; height: 70px; border-radius: 50%; background: var(--color-success-bg); color: var(--color-success); font-size: 2rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem;">
+                <i class="fas fa-check"></i>
+            </div>
+            <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Order Placed!</h3>
+            <p style="margin-bottom: 1.5rem;">Thank you! Our patisserie chefs have received your order and are preparing your fresh confections.</p>
+
+            <div style="background: var(--color-surface-soft); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.25rem; text-align: left; margin-bottom: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem;">
+                    <span style="color: var(--color-text-muted);">Order Reference</span>
+                    <strong id="confirm-order-id">#0000</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem;">
+                    <span style="color: var(--color-text-muted);">Total Billed</span>
+                    <strong id="confirm-total">₹0.00</strong>
+                </div>
+                <div style="font-size: 0.85rem; color: var(--color-text-muted); border-top: 1px dashed var(--color-border); padding-top: 0.5rem; margin-top: 0.5rem;">
+                    <strong>Delivering to:</strong> <span id="confirm-address">Address</span>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 0.75rem;">
+                <button class="btn btn-outline btn-block" onclick="closeModal('confirmation-modal'); openOrdersModal();">
+                    <i class="fas fa-receipt"></i> View in Orders
+                </button>
+                <button class="btn btn-accent btn-block" onclick="closeModal('confirmation-modal');">
+                    <span>Keep Browsing</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         ORDER HISTORY MODAL
+         ========================================== -->
+    <div class="modal-overlay" id="orders-modal">
+        <div class="modal-card modal-lg">
+            <button class="modal-close-btn" onclick="closeModal('orders-modal')" aria-label="Close modal">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="modal-header">
+                <h3>Your Bakery Orders</h3>
+                <p>Track the real-time status and view receipts for all your past purchases.</p>
+            </div>
+
+            <div id="orders-list-container">
+                <!-- Dynamically loaded -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         USER PROFILE MODAL
+         ========================================== -->
+    <div class="modal-overlay" id="profile-modal">
+        <div class="modal-card">
+            <button class="modal-close-btn" onclick="closeModal('profile-modal')" aria-label="Close modal">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="modal-header">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3>Account Profile</h3>
+                    <span class="status-badge" style="background: var(--color-gold-light); color: var(--color-gold);" id="profile-role-badge">customer</span>
+                </div>
+                <p>Manage your personal details and password.</p>
+            </div>
+
+            <!-- Profile Details Form -->
+            <form id="form-profile-details" style="margin-bottom: 2rem;">
+                <h4 style="font-size: 1.05rem; margin-bottom: 0.75rem; color: var(--color-primary);">Personal Details</h4>
+                <div class="form-group">
+                    <label class="form-label" for="profile-name">Full Name</label>
+                    <input type="text" id="profile-name" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="profile-email">Email Address</label>
+                    <input type="email" id="profile-email" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="profile-phone">Phone Number</label>
+                    <input type="tel" id="profile-phone" class="form-input">
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm">Save Profile Changes</button>
+            </form>
+
+            <!-- Password Change Form -->
+            <form id="form-profile-password" style="margin-bottom: 2rem; border-top: 1px solid var(--color-border); padding-top: 1.5rem;">
+                <h4 style="font-size: 1.05rem; margin-bottom: 0.75rem; color: var(--color-primary);">Change Password</h4>
+                <div class="form-group">
+                    <label class="form-label" for="profile-current-password">Current Password</label>
+                    <input type="password" id="profile-current-password" class="form-input" required autocomplete="current-password">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="profile-new-password">New Password</label>
+                        <input type="password" id="profile-new-password" class="form-input" minlength="6" required autocomplete="new-password">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="profile-confirm-password">Confirm Password</label>
+                        <input type="password" id="profile-confirm-password" class="form-input" minlength="6" required autocomplete="new-password">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-outline btn-sm">Update Password</button>
+            </form>
+
+            <!-- Danger Zone -->
+            <div style="border-top: 1px solid var(--color-border); padding-top: 1.25rem;">
+                <h4 style="font-size: 0.95rem; color: var(--color-danger); margin-bottom: 0.35rem;">Danger Zone</h4>
+                <p style="font-size: 0.82rem; margin-bottom: 0.75rem;">Deleting your account will remove your saved cart. Your order history will be permanently detached.</p>
+                <button type="button" class="btn btn-outline btn-sm" onclick="handleDeleteAccount()" style="color: var(--color-danger); border-color: var(--color-danger);">
+                    <i class="fas fa-trash-alt"></i> Delete Account
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         ADMIN PORTAL MODAL
+         ========================================== -->
+    <div class="modal-overlay" id="admin-modal">
+        <div class="modal-card modal-lg" style="max-width: 900px;">
+            <button class="modal-close-btn" onclick="closeModal('admin-modal')" aria-label="Close modal">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="modal-header">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <h3><i class="fas fa-shield-alt" style="color:var(--color-gold);"></i> CakeHub Admin Portal</h3>
+                    <span class="status-badge" style="background:var(--color-gold-light); color:var(--color-gold);">Authorized Admin</span>
+                </div>
+                <p>Manage live customer orders and update the bakery product catalogue.</p>
+            </div>
+
+            <!-- Tab Switcher -->
+            <div style="display:flex; gap:0.5rem; margin-bottom:1.5rem;">
+                <button class="cat-pill active" id="admin-tab-orders-btn" onclick="switchAdminTab('orders')">
+                    <i class="fas fa-receipt"></i> Customer Orders
+                </button>
+                <button class="cat-pill" id="admin-tab-products-btn" onclick="switchAdminTab('products')">
+                    <i class="fas fa-plus-circle"></i> Add New Cake / Item
+                </button>
+            </div>
+
+            <!-- Admin Orders View -->
+            <div id="admin-orders-view">
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                        <thead>
+                            <tr style="border-bottom: 2px solid var(--color-border); font-size: 0.85rem; color: var(--color-text-muted);">
+                                <th style="padding: 0.6rem 0.5rem;">Order</th>
+                                <th style="padding: 0.6rem 0.5rem;">Customer</th>
+                                <th style="padding: 0.6rem 0.5rem;">Delivery Address</th>
+                                <th style="padding: 0.6rem 0.5rem;">Total</th>
+                                <th style="padding: 0.6rem 0.5rem;">Status</th>
+                                <th style="padding: 0.6rem 0.5rem;">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-orders-table-body">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Admin Add Product View -->
+            <div id="admin-products-view" style="display: none;">
+                <form id="form-admin-create-product">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="admin-prod-name">Product Name *</label>
+                            <input type="text" id="admin-prod-name" class="form-input" required placeholder="e.g. Raspberry Pistachio Tart">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="admin-prod-category">Category *</label>
+                            <select id="admin-prod-category" class="form-select">
+                                <option value="Cakes">Cakes</option>
+                                <option value="Cookies">Cookies</option>
+                                <option value="Pastries">Pastries</option>
+                                <option value="Viennoiseries">Viennoiseries</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="admin-prod-price">Price (₹) *</label>
+                            <input type="number" step="0.01" id="admin-prod-price" class="form-input" required placeholder="e.g. 450.00">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="admin-prod-image">Image Filename</label>
+                            <input type="text" id="admin-prod-image" class="form-input" placeholder="e.g. chocolate-cake.jpg" value="chocolate-cake.jpg">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="admin-prod-desc">Description</label>
+                        <textarea id="admin-prod-desc" class="form-textarea" rows="3" placeholder="Artisanal flavor description..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add Product to Storefront
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         TOAST NOTIFICATIONS CONTAINER
+         ========================================== -->
+    <div id="toast-container"></div>
+
+    <!-- Application JavaScript -->
+    <script src="js/app.js"></script>
+</body>
+</html>
